@@ -3,11 +3,9 @@
 namespace AppBundle\Model;
 
 use AppBundle\Entity\Questions;
-use AppBundle\Model\GameModel;
-use AppBundle\Entity\Game;
 use AppBundle\Repository\QuestionsRepository;
 use Doctrine\ORM\EntityManager;
-use AppBundle\UserBundle\Dql;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class QuestionModel {
 
@@ -57,24 +55,28 @@ class QuestionModel {
         }
     }
 
-    public function drawAnUnaskedQuestion($alreadyAskedQuestions) {
-        $drawQuestion = $this->getARandomQuestion();
-
-        if ($this->compareQuestions($alreadyAskedQuestions, $drawQuestion)) {
-            $drawQuestion = $this->drawAnUnaskedQuestion($alreadyAskedQuestions);
-        } else {
-            return $drawQuestion;
-        }
-    }
-
-    public function compareQuestions($alreadyAskedQuestions, $singleQuestion) {
-        foreach ($alreadyAskedQuestions as $question) {
-            if ($question == $singleQuestion) {
-                return false;
-            } else {
-                return true;
+    public function drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions) {
+        do {
+            $i = 0;
+            $newQuestion = $this->getARandomQuestion()->getQuestion();
+            foreach ($arrayOfAlreadyAskedQuestions as $singleQuestion) {
+                var_dump($singleQuestion->getQuestion());
+                var_dump($newQuestion . 'nowe pytanie');
+//                
+                var_dump((strcmp($newQuestion, $singleQuestion->getQuestion())));
+//                exit;
+                if (strcmp($newQuestion, $singleQuestion->getQuestion()) !== 0) {
+                    $i++;
+                }
             }
-        }
+
+            if ($i == count($arrayOfAlreadyAskedQuestions)) {
+                return $newQuestion . 'test';
+            } else {
+                $i = 0;
+            }
+//            exit;
+        } while ($i == 0);
     }
 
 }

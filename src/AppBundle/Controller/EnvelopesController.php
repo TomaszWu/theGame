@@ -5,11 +5,12 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Envelopes;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EnvelopesController extends Controller {
 
     public function chooseTheEnvelopeAction(Request $request) {
-        $value = ['100', '200', '300', '400', '500'];
+        $value = ['1', '2', '3', '4', '5'];
 
         $form = $this->createFormBuilder()
                 ->add('Koperta', 'choice', [
@@ -21,8 +22,7 @@ class EnvelopesController extends Controller {
         
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            var_dump($_POST);
-            echo 'tak';
+            return new RedirectResponse($this->generateUrl('game_get_question'));
         }
 
         return $this->render("@App/Envelopes/chooseTheEnvelope.html.twig", ['form' => $form->createView()]);
