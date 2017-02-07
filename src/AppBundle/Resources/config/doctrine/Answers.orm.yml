@@ -1,0 +1,27 @@
+AppBundle\Entity\Answers:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AnswersRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        answer:
+            type: string
+            length: 255
+        isCorrect:
+            type: boolean
+            column: is_correct
+            nullable: TRUE
+    manyToOne:
+        question:
+            targetEntity: Questions
+            inversedBy: answers
+            joinColumn:
+                name: question_id
+                referencedColumnName: id
+                cascade: ["onDelete", "onUpdate"]
+    lifecycleCallbacks: {  }

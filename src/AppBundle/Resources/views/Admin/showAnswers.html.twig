@@ -1,0 +1,16 @@
+
+<table>
+
+    {% for answer in previousAnswers %}
+        <tr>
+            <td>
+            </td>
+            <td>{{answer.answer}}</td>
+            <td>
+                {%if answer.isCorrect == 1%}
+                    Odpowiedź poprawna
+                {% endif%}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

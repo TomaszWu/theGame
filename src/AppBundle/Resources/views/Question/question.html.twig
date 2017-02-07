@@ -1,0 +1,17 @@
+{#{% extends '::base.html.twig' %}
+{% block body %}
+    {{question.question}}
+    <form>
+        {% for answer in question.answers %}
+            <input type="checkbox" class="answer" value="{{ answer.id }}" value="{{answer.answer}}">{{answer.answer}}<br>
+        {%endfor%}
+        <input type="submit" id="confirm" value="Sprawdź odpowiedź">
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/app/javascripts/question.js') }}" ></script>
+{% endblock %}
+#}
+{% for questiona in question %}
+    {{ questiona.question}}
+{% endfor%}

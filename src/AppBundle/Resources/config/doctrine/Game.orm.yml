@@ -1,0 +1,45 @@
+AppBundle\Entity\Game:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\GameRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        money:
+            type: integer
+    manyToOne:
+        users:
+          targetEntity: UserBundle\Entity\User
+          joinColumn:
+              name: user_id
+              referencedColumnName: id
+    manyToMany:
+            
+        questions:
+            targetEntity: AppBundle\Entity\Questions
+            inversedBy: games
+            joinTable:
+               name: game_questions
+               joinColumns:
+                  game_id:
+                      referencedColumnName: id
+               inverseJoinColumns:
+                  question_id:
+                      referencedColumnName: id 
+                      
+        envelopes:
+            targetEntity: AppBundle\Entity\Envelopes
+            inversedBy: games
+            joinTable:
+                name: game_envelopes
+                joinColumns:
+                    game_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    envelope_id:
+                        referencedColumnName: id
+    lifecycleCallbacks: {  }

@@ -1,0 +1,22 @@
+UserBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: UserBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToMany:
+        user_answers:
+            targetEntity: AppBundle\Entity\Answers
+            joinTable:
+                name: user_answers
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    answer_id:
+                        referencedColumnName: id
+    lifecycleCallbacks: {  }

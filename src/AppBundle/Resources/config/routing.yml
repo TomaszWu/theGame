@@ -1,0 +1,45 @@
+app_homepage:
+    path: /
+    defaults: { _controller: AppBundle:Default:index }
+admin_homepage:
+    path: /admin
+    defaults: { _controller: AppBundle:Admin:index }
+admin_add_envelope:
+    path: /admin/addEnvelope
+    defaults: { _controller: AppBundle:Admin:addEnvelope }
+admin_list_envelope:
+    path: /admin/envelopeList
+    defaults: { _controller: AppBundle:Admin:envelopeList}
+player_homepage:
+    path: /player
+    defaults: { _controller: AppBundle:Player:index }
+admin_add_question:
+    path: /admin/addQuestion
+    defaults: { _controller: AppBundle:Admin:addQuestion }
+admin_list_question:
+    path: /admin/questionList
+    defaults: {_controller: AppBundle:Admin:questionList }
+admin_delete_question:
+    path: /admin/deleteQuestion/{id}
+    defaults: {_controller: AppBundle:Admin:deleteQuestion }
+admin_add_answer:
+    path: /admin/addAnswer/{id}
+    defaults: {_controller: AppBundle:Admin:addAnAnswerToTheQuestion}
+show_all_answers:
+    path: /admin/showAllAnswers/{id}
+    defaults: {_controller: AppBundle:Admin:getAllAnswersByQuestionId}
+choose_the_envelope:
+    path: /player/chooseTheEnvelope
+    defaults: {_controller: AppBundle:Envelopes:chooseTheEnvelope}
+game_test:
+    path: /player/test
+    defaults: {_controller: AppBundle:Game:test}
+game_start:
+    path: /player/start
+    defaults: {_controller: AppBundle:Game:startANewGame}
+game_get_question:
+    path: /game/question
+    defaults: { _controller: AppBundle:Questions:drawAQuestion }
+game_check_answer:
+    path: /game/answer
+    defaults: { _controller: AppBundle:Answer:ifAnswerIsCorrect }

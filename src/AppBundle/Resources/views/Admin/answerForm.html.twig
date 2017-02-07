@@ -1,0 +1,13 @@
+<h1>{{question.question}}</h1>
+<h3>Odpowiedź nr {{answerNum}}</h3>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{% if previousAnswers is defined %}
+    <ol>
+        {% for previousAnswer in previousAnswers %}
+            <li>{{ previousAnswer.answer }}</li>
+            {% endfor %}
+    </ol>
+{% endif %}

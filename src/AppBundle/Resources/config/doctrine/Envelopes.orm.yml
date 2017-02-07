@@ -1,0 +1,22 @@
+AppBundle\Entity\Envelopes:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\EnvelopesRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        value:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    
+    manyToMany:
+      game:
+        targetEntity: Game
+        mappedBy: envelopes
+        
+    

@@ -1,0 +1,39 @@
+services:
+#    user.example:
+#        class: UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    envelope.repository:
+        class: AppBundle\Repository\EnvelopesRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Envelopes
+    envelope.model:
+        class: AppBundle\Model\EnvelopeModel
+        arguments: ["@doctrine.orm.default_entity_manager", "@envelope.repository"]
+        
+    question.repository:
+        class: AppBundle\Repository\QuestionsRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Questions
+    question.model:
+        class: AppBundle\Model\QuestionModel
+        arguments: ["@doctrine.orm.default_entity_manager", "@question.repository"]
+        
+    answers.repository:
+        class: AppBundle\Repository\AnswersRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Answers
+    answers.model:
+        class: AppBundle\Model\AnswersModel
+        arguments: ["@doctrine.orm.default_entity_manager", "@answers.repository"]
+        
+    game.repository:
+        class: AppBundle\Repository\GameRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Game
+    game.model:
+        class: AppBundle\Model\GameModel
+        arguments: ["@doctrine.orm.default_entity_manager", "@game.repository"]

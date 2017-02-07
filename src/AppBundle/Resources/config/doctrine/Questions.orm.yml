@@ -1,0 +1,25 @@
+AppBundle\Entity\Questions:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\QuestionsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        question:
+            type: text
+    lifecycleCallbacks: {  }
+    oneToMany:
+        answers:
+            targetEntity: Answers
+            mappedBy: questions
+            
+            
+    manyToMany:
+      game:
+        targetEntity: AppBundle\Entity\Game
+        mappedBy: questions        
+    lifecycleCallbacks: {  }

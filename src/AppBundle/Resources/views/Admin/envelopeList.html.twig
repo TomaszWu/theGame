@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Value</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for envelope in envelopes %}
+        <tr>
+            <td>
+                {{ envelope.id }}
+            </td>
+            <td>
+                {{ envelope.value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
