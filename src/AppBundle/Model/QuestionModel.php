@@ -56,27 +56,35 @@ class QuestionModel {
     }
 
     public function drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions) {
-        do {
-            $i = 0;
-            $newQuestion = $this->getARandomQuestion()->getQuestion();
-            foreach ($arrayOfAlreadyAskedQuestions as $singleQuestion) {
-                var_dump($singleQuestion->getQuestion());
-                var_dump($newQuestion . 'nowe pytanie');
-//                
-                var_dump((strcmp($newQuestion, $singleQuestion->getQuestion())));
-//                exit;
-                if (strcmp($newQuestion, $singleQuestion->getQuestion()) !== 0) {
-                    $i++;
-                }
-            }
-
-            if ($i == count($arrayOfAlreadyAskedQuestions)) {
-                return $newQuestion . 'test';
-            } else {
+        $allQurstions = $this->getAllQuestion();
+        // number of already asked questions is equal to all questions in DB
+        // it means that all questions have been already asked and the game is over
+        if (count($arrayOfAlreadyAskedQuestions) !== count($allQurstions)) {
+            do {
                 $i = 0;
-            }
+                $newQuestion = $this->getARandomQuestion();
+                foreach ($arrayOfAlreadyAskedQuestions as $singleQuestion) {
+                    var_dump($singleQuestion->getQuestion());
+                    var_dump($newQuestion->getQuestion());
+//                
+                    var_dump((strcmp($newQuestion->getQuestion(), $singleQuestion->getQuestion())));
+//                if the draw question is different to the one in DB then $i++
+                    if (strcmp($newQuestion->getQuestion(), $singleQuestion->getQuestion()) !== 0) {
+                        $i++;
+                    }
+                }
+                // if in every loop draw question was different to the all single 
+                // questions from DB it emans that it is a good one
+                if ($i == count($arrayOfAlreadyAskedQuestions)) {
+                    return $newQuestion;
+                } else {
+                    $i = 0;
+                }
 //            exit;
-        } while ($i == 0);
+            } while ($i == 0);
+        } else {
+            return null;
+        }
     }
 
 }

@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Questions;
 use AppBundle\Entity\Answers;
 use AppBundle\Model\QuestionModel;
+use AppBundle\Entity\Game;
+use AppBundle\Model\GameModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,16 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class QuestionsController extends Controller {
 
     public function drawAQuestionAction(Request $request) {
-//        $question = $this->get('question.model')->aRandomQuestion();
         $gameId = $this->get('session')->get('gameId');
         $game = $this->get('game.model')->getGameById($gameId);
-//
-        $questions = $this->get('game.model')->getAlreadyAskedQuestions($game);
+        $alreadyAskedQuestions = $game->getQuestions();
+        $arrayOfAlreadyAskedQuestions = $alreadyAskedQuestions->toArray();
         
-        $test = $this->get('question.model')->drawAnUnaskedQuestion($questions);
-        var_dump($test);
+        $newQuestion = $this->get('question.model')->drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions);
+        if($newQuestion){
+        $game->addQuestion($newQuestion);
+        $this->get('game.model')->save($game);
+        } else {
+            echo 'end of the game';
+        }
+//        
         exit;
-
 
 
         if ($request->isMethod('POST')) {
@@ -36,7 +42,7 @@ class QuestionsController extends Controller {
             }
         }
         return $this->render('@App/Question/question.html.twig', array('question' =>
-                    $question));
+                    $questions));
     }
 
 }
