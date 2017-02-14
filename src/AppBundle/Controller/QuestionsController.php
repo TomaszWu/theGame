@@ -14,21 +14,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class QuestionsController extends Controller {
 
-    public function drawAQuestionAction(Request $request) {
+    public function drawAQuestionAction(Request $request, $envelopeValue) {
         $gameId = $this->get('session')->get('gameId');
         $game = $this->get('game.model')->getGameById($gameId);
         $alreadyAskedQuestions = $game->getQuestions();
         $arrayOfAlreadyAskedQuestions = $alreadyAskedQuestions->toArray();
-        
-        $newQuestion = $this->get('question.model')->drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions);
-        if($newQuestion){
-        $game->addQuestion($newQuestion);
-        $this->get('game.model')->save($game);
+
+        $question = $this->get('question.model')->drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions);
+        if ($question) {
+            $game->addQuestion($question);
+            $this->get('game.model')->save($game);
         } else {
             echo 'end of the game';
         }
-//        
-        exit;
+//        var_dump($question->getAnswers());exit;
 
 
         if ($request->isMethod('POST')) {
@@ -42,7 +41,13 @@ class QuestionsController extends Controller {
             }
         }
         return $this->render('@App/Question/question.html.twig', array('question' =>
-                    $questions));
+                    $question, 'envelopeValue' => $envelopeValue));
     }
 
+    function testAction(Request $request) {
+        $test = $request->request->get('test');
+
+        return new JsonResponse(['success' => true, 'message' => 'Thank you']);
+        
+    }
 }
