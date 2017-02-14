@@ -36,4 +36,11 @@ class EnvelopeModel
      public function getEnvelopeById($id) {
         return $this->envelopeRepository->findOneById($id);
     }
+    
+    public function determineTheValueOfTheEnvelope(){
+        $value = rand(1, 10) * 100;
+        return $value;
+    }
+    
+    
 }

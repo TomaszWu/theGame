@@ -64,10 +64,10 @@ class QuestionModel {
                 $i = 0;
                 $newQuestion = $this->getARandomQuestion();
                 foreach ($arrayOfAlreadyAskedQuestions as $singleQuestion) {
-                    var_dump($singleQuestion->getQuestion());
-                    var_dump($newQuestion->getQuestion());
-//                
-                    var_dump((strcmp($newQuestion->getQuestion(), $singleQuestion->getQuestion())));
+//                    var_dump($singleQuestion->getQuestion());
+//                    var_dump($newQuestion->getQuestion());
+////                
+//                    var_dump((strcmp($newQuestion->getQuestion(), $singleQuestion->getQuestion())));
 //                if the draw question is different to the one in DB then $i++
                     if (strcmp($newQuestion->getQuestion(), $singleQuestion->getQuestion()) !== 0) {
                         $i++;

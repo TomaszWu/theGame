@@ -35,5 +35,8 @@ class GameModel {
     public function getGameById($id) {
         return $this->gameRepository->findOneById($id);
     }
+    
+    
+    
 
 }
