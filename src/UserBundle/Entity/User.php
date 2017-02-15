@@ -22,54 +22,40 @@ class User extends BaseUser
      */
     protected $id;
 
+    
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $user_answers;
 
-    public function __construct(){
-        $this->user_answers = new ArrayCollection();
-        parent::__construct();
-    }
 
     /**
-     * Get id
+     * Add user_answers
      *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add userAnswer
-     *
-     * @param \AppBundle\Entity\Answers $userAnswer
-     *
+     * @param \AppBundle\Entity\Answers $userAnswers
      * @return User
      */
-    public function addUserAnswer(\AppBundle\Entity\Answers $userAnswer)
+    public function addUserAnswer(\AppBundle\Entity\Answers $userAnswers)
     {
-        $this->user_answers[] = $userAnswer;
+        $this->user_answers[] = $userAnswers;
 
         return $this;
     }
 
     /**
-     * Remove userAnswer
+     * Remove user_answers
      *
-     * @param \AppBundle\Entity\Answers $userAnswer
+     * @param \AppBundle\Entity\Answers $userAnswers
      */
-    public function removeUserAnswer(\AppBundle\Entity\Answers $userAnswer)
+    public function removeUserAnswer(\AppBundle\Entity\Answers $userAnswers)
     {
-        $this->user_answers->removeElement($userAnswer);
+        $this->user_answers->removeElement($userAnswers);
     }
 
     /**
-     * Get userAnswers
+     * Get user_answers
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUserAnswers()
     {

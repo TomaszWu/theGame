@@ -166,4 +166,86 @@ class Game
     {
         return $this->game_envelopes;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $questions;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $envelopes;
+
+
+    /**
+     * Add questions
+     *
+     * @param \AppBundle\Entity\Questions $questions
+     * @return Game
+     */
+    public function addQuestion(\AppBundle\Entity\Questions $questions)
+    {
+        $this->questions[] = $questions;
+
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \AppBundle\Entity\Questions $questions
+     */
+    public function removeQuestion(\AppBundle\Entity\Questions $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Add envelopes
+     *
+     * @param \AppBundle\Entity\Envelopes $envelopes
+     * @return Game
+     */
+    public function addEnvelope(\AppBundle\Entity\Envelopes $envelopes)
+    {
+        $this->envelopes[] = $envelopes;
+
+        return $this;
+    }
+
+    /**
+     * Remove envelopes
+     *
+     * @param \AppBundle\Entity\Envelopes $envelopes
+     */
+    public function removeEnvelope(\AppBundle\Entity\Envelopes $envelopes)
+    {
+        $this->envelopes->removeElement($envelopes);
+    }
+
+    /**
+     * Get envelopes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEnvelopes()
+    {
+        return $this->envelopes;
+    }
+    
+    
+    public function __toString() {
+        return (string) $this->getQuestions();
+    }
+    
 }

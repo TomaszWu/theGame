@@ -14,9 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Questions {
 
-   
-   private $answers;
-   
+    private $answers;
+
     /**
      * @var int
      */
@@ -27,11 +26,24 @@ class Questions {
      */
     private $question;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $game;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->game = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -42,7 +54,6 @@ class Questions {
      * Set question
      *
      * @param string $question
-     *
      * @return Questions
      */
     public function setQuestion($question)
@@ -55,66 +66,76 @@ class Questions {
     /**
      * Get question
      *
-     * @return string
+     * @return string 
      */
     public function getQuestion()
     {
         return $this->question;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $answer;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->answer = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add answer
+     * Add answers
      *
-     * @param \AppBundle\Entity\Answers $answer
-     *
+     * @param \AppBundle\Entity\Answers $answers
      * @return Questions
      */
-    public function addAnswer(\AppBundle\Entity\Answers $answer)
+    public function addAnswer(\AppBundle\Entity\Answers $answers)
     {
-        $this->answer[] = $answer;
+        $this->answers[] = $answers;
 
         return $this;
     }
 
     /**
-     * Remove answer
+     * Remove answers
      *
-     * @param \AppBundle\Entity\Answers $answer
+     * @param \AppBundle\Entity\Answers $answers
      */
-    public function removeAnswer(\AppBundle\Entity\Answers $answer)
+    public function removeAnswer(\AppBundle\Entity\Answers $answers)
     {
-        $this->answer->removeElement($answer);
-    }
-
-    /**
-     * Get answer
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
+        $this->answers->removeElement($answers);
     }
 
     /**
      * Get answers
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    /**
+     * Add game
+     *
+     * @param \AppBundle\Entity\Game $game
+     * @return Questions
+     */
+    public function addGame(\AppBundle\Entity\Game $game)
+    {
+        $this->game[] = $game;
+
+        return $this;
+    }
+
+    /**
+     * Remove game
+     *
+     * @param \AppBundle\Entity\Game $game
+     */
+    public function removeGame(\AppBundle\Entity\Game $game)
+    {
+        $this->game->removeElement($game);
+    }
+
+    /**
+     * Get game
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGame()
+    {
+        return $this->game;
     }
 }

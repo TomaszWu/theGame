@@ -40,6 +40,7 @@ class GameController extends Controller {
             $this->get('game.model')->save($game);
             $session = $request->getSession();
             $session->set('gameId', $game->getId());
+            $session->set('envelopeValue', 0);
             return new RedirectResponse($this->generateUrl('choose_the_envelope'));
         }
         return $this->render("@App/Game/startANewGame.html.twig", ['form' => $form->createView()]);

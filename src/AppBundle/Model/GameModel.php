@@ -36,6 +36,16 @@ class GameModel {
         return $this->gameRepository->findOneById($id);
     }
     
+    public function checkTheCurrentWinnings(Game $game){
+        $envelopes = $game->getEnvelopes();
+        $currentWinnings = 0;
+        foreach ($envelopes as $singleEnvelope){
+            $currentWinnings += $singleEnvelope->getValue();
+        }
+        return $currentWinnings;
+        
+    }
+    
     
     
 

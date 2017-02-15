@@ -15,7 +15,7 @@ AppBundle\Entity\Questions:
     oneToMany:
         answers:
             targetEntity: Answers
-            mappedBy: questions
+            mappedBy: question
             
             
     manyToMany:
@@ -23,3 +23,6 @@ AppBundle\Entity\Questions:
         targetEntity: AppBundle\Entity\Game
         mappedBy: questions        
     lifecycleCallbacks: {  }
+    
+
+        

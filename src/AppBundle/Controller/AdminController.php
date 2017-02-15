@@ -91,9 +91,11 @@ class AdminController extends Controller {
         return $this->render('@App/Admin/questionList.html.twig', ['questions' => $questions]);
     }
 
-//    public function deleteQuestionAction(Questions $question) {
-//        $this->get('question.model')->delete($question);
-//        return new RedirectResponse($this->generateUrl('admin_list_question'));
-//    }
+    public function deleteQuestionAction(Questions $question) {
+        $this->get('question.model')->delete($question);
+        return new RedirectResponse($this->generateUrl('admin_list_question'));
+    }
+    
+    
 
 }

@@ -14,40 +14,45 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class QuestionsController extends Controller {
 
-    public function drawAQuestionAction(Request $request, $envelopeValue) {
-        $gameId = $this->get('session')->get('gameId');
+    public function drawAQuestionAction(Request $request) {
+        $session = $this->get('session');
+        $gameId = $session->get('gameId');
+        $envelopeValue = $session->get('choosenEnvelope')->getValue();
         $game = $this->get('game.model')->getGameById($gameId);
-        $alreadyAskedQuestions = $game->getQuestions();
-        $arrayOfAlreadyAskedQuestions = $alreadyAskedQuestions->toArray();
-
-        $question = $this->get('question.model')->drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions);
+        $questionId = $session->get('questionId');
+        $question = $this->get('question.model')->getQuestionById($questionId);
+        $currentWinnings = $this->get('game.model')->checkTheCurrentWinnings($game);
         if ($question) {
-            $game->addQuestion($question);
-            $this->get('game.model')->save($game);
         } else {
             echo 'end of the game';
         }
-//        var_dump($question->getAnswers());exit;
-
-
         if ($request->isMethod('POST')) {
 //            $answerToCheck = $request->request->get('answerToCheck');
             $answerCorrectnessToCheck = $this->get('answers.model')
                     ->getAnswerById($request->request->get('answerToCheck'));
             if ($answerCorrectnessToCheck->getIsCorrect()) {
-                return new JsonResponse(['success' => true]);
+                $choosenEnvelope = $session->get('choosenEnvelope');
+                $this->get('envelope.model')->save($choosenEnvelope);
+                $game->addEnvelope($choosenEnvelope);
+                $game->addQuestion($question);
+                $this->get('game.model')->save($game);
+                return new JsonResponse(['answer' => 'good', 'envelopeValue' => 
+                    $envelopeValue, 'currentWinnings' => $currentWinnings]);
             } else {
-                return new JsonResponse(['false' => false]);
+                return new JsonResponse(['answer' => 'wrong']);
             }
         }
+
+
         return $this->render('@App/Question/question.html.twig', array('question' =>
-                    $question, 'envelopeValue' => $envelopeValue));
+                    $question, 'envelopeValue' => $envelopeValue,
+                    'currentWinnings' => $currentWinnings));
     }
 
     function testAction(Request $request) {
         $test = $request->request->get('test');
 
         return new JsonResponse(['success' => true, 'message' => 'Thank you']);
-        
     }
+
 }

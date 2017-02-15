@@ -1,35 +1,33 @@
 
 $(function () {
 
-//    $('#test').on('click', function (el) {
-//        event.preventDefault();
-//        event.stopImmediatePropagation();
-//        console.log($(el.target));
-//
-//        $.ajax({
-//            method: 'POST',
-//            type: 'JSON',
-//            data: {test: 'test'},
-//            success: function (response) {
-//                console.log((response));
-//            }
-//        });
-//    });
+    var startTheGameBtn = $('<button>').val('start');
+    
 
-    $('input.answer').on('click', function () {
-        $('input.answer').not(this).prop('checked', false);
-    });
-
-    $('#confirm').on('click', function (event) {
+    $('#confirm').on('click', function (el) {
+        console.log($(el.target).parent());
         var answerToCheck = $('.answer:checked').val();
-        console.log(answerToCheck);
         event.preventDefault();
         $.ajax({
             method: 'POST',
             type: 'JSON',
             data: {answerToCheck: answerToCheck},
             success: function (response) {
-                console.log((response));
+//                console.log((response['false']));
+                switch (response['answer']) {
+                    case 'good':
+                        var envelopeValue = response['envelopeValue'];
+                        var currentWinnings = response['currentWinnings'];
+                        $('#playground').children().remove();
+                        var winningDiv = $('<div>');
+                        
+                        
+                        
+                        break;
+                    case 'wrong':
+                        console.log('nie');
+                        break;
+                }
             }
         });
 

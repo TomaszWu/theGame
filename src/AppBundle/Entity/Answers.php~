@@ -33,11 +33,16 @@ class Answers
 
 
    
+    /**
+     * @var \AppBundle\Entity\Questions
+     */
+    private $question;
+
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -48,7 +53,6 @@ class Answers
      * Set answer
      *
      * @param string $answer
-     *
      * @return Answers
      */
     public function setAnswer($answer)
@@ -61,7 +65,7 @@ class Answers
     /**
      * Get answer
      *
-     * @return string
+     * @return string 
      */
     public function getAnswer()
     {
@@ -72,7 +76,6 @@ class Answers
      * Set isCorrect
      *
      * @param boolean $isCorrect
-     *
      * @return Answers
      */
     public function setIsCorrect($isCorrect)
@@ -85,7 +88,7 @@ class Answers
     /**
      * Get isCorrect
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getIsCorrect()
     {
@@ -96,7 +99,6 @@ class Answers
      * Set question
      *
      * @param \AppBundle\Entity\Questions $question
-     *
      * @return Answers
      */
     public function setQuestion(\AppBundle\Entity\Questions $question = null)
@@ -109,16 +111,10 @@ class Answers
     /**
      * Get question
      *
-     * @return \AppBundle\Entity\Questions
+     * @return \AppBundle\Entity\Questions 
      */
     public function getQuestion()
     {
         return $this->question;
     }
-    /**
-     * @var \AppBundle\Entity\Questions
-     */
-    private $question;
-
-
 }

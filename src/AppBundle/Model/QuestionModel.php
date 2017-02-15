@@ -34,6 +34,10 @@ class QuestionModel {
         $this->entityManager->remove($questions);
         $this->entityManager->flush();
     }
+    
+     public function getQuestionById($id) {
+        return $this->questionsRepository->findOneById($id);
+    }
 
     public function getAllQuestion() {
         return $this->questionsRepository->findAll();

@@ -43,3 +43,6 @@ game_get_question:
 game_check_answer:
     path: /game/answer
     defaults: { _controller: AppBundle:Answer:ifAnswerIsCorrect }
+test_js:
+    path: /game/test
+    defaults: { _controller: AppBundle:Questions:test }

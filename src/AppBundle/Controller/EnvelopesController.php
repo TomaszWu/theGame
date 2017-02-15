@@ -29,16 +29,21 @@ class EnvelopesController extends Controller {
             $game = $this->get('game.model')->getGameById($gameId);
             $choosenEnvelope = new Envelopes;
             $envelopeValue = $this->get('envelope.model')->determineTheValueOfTheEnvelope();
+            $session = $request->getSession();
+            $alreadyAskedQuestions = $game->getQuestions();
+            $arrayOfAlreadyAskedQuestions = $alreadyAskedQuestions->toArray();
+            $drawnQuestion = $this->get('question.model')->drawAUnAskedQuestion($arrayOfAlreadyAskedQuestions);
+            // all details like questionId and envelope value have to be determine here, otherwise 
+            // when the next action was taken and the page page was refreshed it gave the chance to change
+            // question or envelope value. 
+            $session->set('questionId', $drawnQuestion->getId());
             $choosenEnvelope->setValue($envelopeValue);
-            $this->get('envelope.model')->save($choosenEnvelope);
-            $game->addEnvelope($choosenEnvelope);
-            $this->get('game.model')->save($game);
-            return new RedirectResponse($this->generateUrl('game_get_question', 
-                    array('envelopeValue' => $envelopeValue)));
+            $session->set('choosenEnvelope', $choosenEnvelope);
+
+            return new RedirectResponse($this->generateUrl('game_get_question'));
         }
 
-        return $this->render("@App/Envelopes/chooseTheEnvelope.html.twig", 
-                ['form' => $form->createView()]);
+        return $this->render("@App/Envelopes/chooseTheEnvelope.html.twig", ['form' => $form->createView()]);
     }
 
 }
