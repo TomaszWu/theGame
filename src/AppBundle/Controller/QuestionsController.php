@@ -36,6 +36,7 @@ class QuestionsController extends Controller {
                 $game->addEnvelope($choosenEnvelope);
                 $game->addQuestion($question);
                 $this->get('game.model')->save($game);
+                $currentWinnings += $envelopeValue;
                 return new JsonResponse(['answer' => 'good', 'envelopeValue' => 
                     $envelopeValue, 'currentWinnings' => $currentWinnings]);
             } else {
