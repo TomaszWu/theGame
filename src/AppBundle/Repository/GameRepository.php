@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class GameRepository extends \Doctrine\ORM\EntityRepository
 {
+    
+    public function findFinishedGamesByUser($user) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+                'SELECT u FROM AppBundle:game u'
+                . ' WHERE u.users = :userId AND u.isFinished = 1'
+                )->setParameter('userId', $user);
+        $gamesFinshedByUser = $query->getResult();
+        return $gamesFinshedByUser;
+    }
+    
+    
 }
