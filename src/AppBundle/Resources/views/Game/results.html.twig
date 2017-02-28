@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <h3>Najlepsze wyniki:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Gracz</th>
+                <th>Wynik</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for game in tenTopGames %}
+                <tr>
+                    <td>{{game.users}}</td>
+                    <td>{{game.money}}</td>
+                <tr>
+                {%endfor%}
+        </tbody>
+    </table>
+
+    <a href="{{ path('game_start') }}">Nowa gra</a>
+{% endblock %}
+
