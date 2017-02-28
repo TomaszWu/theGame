@@ -1,4 +1,3 @@
-
 $(function () {
 
 
@@ -29,12 +28,29 @@ $(function () {
                         $(document).on('click', '#nextQuestion', function (el) {
                             window.location.href = '/player/chooseTheEnvelope';
                         })
+                        $(document).on('click', '#quiteGame', function (el) {
+                            $.ajax({
+                                url: '/game/finish',
+                                method: 'POST',
+                                type: 'JSON',
+                                data: {finishTheGame: 1},
+                                success: function (response) {
+                                    console.log(response);
+                                    window.location.href = '/game/results';
+//                                    window.location.href = '/player/chooseTheEnvelope';
+                                }
+                                        
+
+
+
+                            })
+                        });
                         break;
                     case 'wrong':
                         console.log('nie');
                         break;
                 }
-                
+
             }
         });
 
